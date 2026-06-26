@@ -1,0 +1,17 @@
+MIMIC-III external audit upload bundle
+
+Upload/package contents:
+- MIMIC3_HPC_RUNBOOK_CN.md       Chinese step-by-step HPC instructions
+- prepare_mimic3_input.py        Deterministic discharge-summary sampling
+- extract_llm_full.py            Resumable Qwen causal-triple extraction
+- extract_full.sbatch            GPU Slurm submission script
+- parse_llm_triples.py           Parse model responses and aggregate edges
+- link_umls.py                   UMLS entity linking
+- validate_edges.py              Lift-based structured EHR validation
+- temporal_direction.py          Cross-admission temporal-direction audit
+- semmeddb_ground_truth.py       Independent SemMedDB direction reference
+- direction_sensitivity.py       SemMedDB PMID-threshold sensitivity analysis
+- summarize_audit.py             JSON summary of the external audit
+
+This bundle deliberately excludes all MIMIC data, SemMedDB data, model weights,
+credentials, prior experiment results, and any patient-level artifacts.

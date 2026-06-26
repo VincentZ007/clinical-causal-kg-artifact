@@ -1,0 +1,46 @@
+# Restricted or patient-level data
+*.jsonl
+*.jsonl.gz
+*.csv
+*.csv.gz
+*.tsv
+*.tsv.gz
+*.gz
+*.zip
+
+# Common generated outputs
+*.out
+*.log
+__pycache__/
+.ipynb_checkpoints/
+.venv/
+.env
+build/
+build*/
+
+# Large or sensitive pipeline intermediates
+prompts*
+answers*
+candidates*
+patient_split*
+cohort*
+full_input*
+pilot_input*
+triples*
+llm_triples*
+phrase2cui*
+edges*
+icd2cui*
+semmeddb*.tsv
+semmeddb*.csv
+semmeddb*.csv.gz
+semmeddb*.log
+
+# Keep public aggregate summaries
+!results/aggregate/*.json
+
+# Keep source code even when names include SemMedDB or prompts.
+!code/**/*.py
+!code/**/*.sh
+!code/**/*.sbatch
+!code/**/*.md

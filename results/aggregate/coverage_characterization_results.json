@@ -1,0 +1,130 @@
+{
+  "n_edges": 16273,
+  "n_covered": 4943,
+  "coverage_pct": 30.375468567565907,
+  "freq": {
+    "covered_median": 3.0,
+    "uncovered_median": 2.0,
+    "covered_mean": 8.317823184301032,
+    "uncovered_mean": 4.48270079435128,
+    "mw_p": 2.436557396703482e-110
+  },
+  "lift": {
+    "covered_median": 1.73,
+    "uncovered_median": 1.39,
+    "covered_mean": 4.532447108603668,
+    "uncovered_mean": 3.871255924170616,
+    "mw_p": 3.894017771022171e-10
+  },
+  "min_deg": {
+    "covered_median": 17.0,
+    "uncovered_median": 11.0,
+    "covered_mean": 38.80194214040057,
+    "uncovered_mean": 27.431862312444835,
+    "mw_p": 3.677819001001379e-49
+  },
+  "coverage_by_freq_decile": [
+    {
+      "decile": 0,
+      "freq_median": 2.0,
+      "coverage_pct": 23.21867321867322
+    },
+    {
+      "decile": 1,
+      "freq_median": 2.0,
+      "coverage_pct": 22.556853103872157
+    },
+    {
+      "decile": 2,
+      "freq_median": 2.0,
+      "coverage_pct": 24.154886293792256
+    },
+    {
+      "decile": 3,
+      "freq_median": 2.0,
+      "coverage_pct": 23.84757221880762
+    },
+    {
+      "decile": 4,
+      "freq_median": 2.0,
+      "coverage_pct": 24.877149877149876
+    },
+    {
+      "decile": 5,
+      "freq_median": 3.0,
+      "coverage_pct": 30.977258758451136
+    },
+    {
+      "decile": 6,
+      "freq_median": 4.0,
+      "coverage_pct": 32.20651505838967
+    },
+    {
+      "decile": 7,
+      "freq_median": 5.0,
+      "coverage_pct": 32.82114320835895
+    },
+    {
+      "decile": 8,
+      "freq_median": 7.0,
+      "coverage_pct": 38.9059618930547
+    },
+    {
+      "decile": 9,
+      "freq_median": 18.0,
+      "coverage_pct": 50.18427518427519
+    }
+  ],
+  "coverage_by_lift_decile": [
+    {
+      "decile": 0,
+      "lift_median": 0.0,
+      "coverage_pct": 51.12540192926045
+    },
+    {
+      "decile": 1,
+      "lift_median": 0.0,
+      "coverage_pct": 39.549839228295816
+    },
+    {
+      "decile": 2,
+      "lift_median": 0.52,
+      "coverage_pct": 31.290322580645164
+    },
+    {
+      "decile": 3,
+      "lift_median": 0.98,
+      "coverage_pct": 39.228295819935695
+    },
+    {
+      "decile": 4,
+      "lift_median": 1.36,
+      "coverage_pct": 42.25806451612903
+    },
+    {
+      "decile": 5,
+      "lift_median": 1.7,
+      "coverage_pct": 42.12218649517685
+    },
+    {
+      "decile": 6,
+      "lift_median": 2.22,
+      "coverage_pct": 45.483870967741936
+    },
+    {
+      "decile": 7,
+      "lift_median": 3.0,
+      "coverage_pct": 52.73311897106109
+    },
+    {
+      "decile": 8,
+      "lift_median": 4.67,
+      "coverage_pct": 54.19354838709678
+    },
+    {
+      "decile": 9,
+      "lift_median": 14.31,
+      "coverage_pct": 58.520900321543415
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+name: ickg-pricai
+channels:
+  - conda-forge
+  - pytorch
+dependencies:
+  - python=3.10
+  - pip
+  - numpy
+  - pandas
+  - scipy
+  - scikit-learn
+  - networkx
+  - tqdm
+  - matplotlib
+  - seaborn
+  - pytorch
+  - transformers
+  - pip:
+      - scispacy
+      - spacy
+      - umls-downloader
+      - vllm

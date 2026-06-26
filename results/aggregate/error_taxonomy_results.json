@@ -1,0 +1,41 @@
+{
+  "closed": {
+    "EXACT": 8.69098712446352,
+    "RETRIEVAL_GAP": 91.30901287553648,
+    "SPECIFICITY_MISS": 0.0,
+    "CLINICAL_ERROR": 0.0,
+    "wrong_marginal": 29.29184549356223,
+    "n": 932
+  },
+  "assoc": {
+    "EXACT": 16.84549356223176,
+    "RETRIEVAL_GAP": 26.931330472103003,
+    "SPECIFICITY_MISS": 42.918454935622314,
+    "CLINICAL_ERROR": 13.304721030042918,
+    "wrong_marginal": 20.92274678111588,
+    "n": 932
+  },
+  "unvalidated": {
+    "EXACT": 16.09442060085837,
+    "RETRIEVAL_GAP": 27.36051502145923,
+    "SPECIFICITY_MISS": 46.67381974248927,
+    "CLINICAL_ERROR": 9.871244635193133,
+    "wrong_marginal": 16.523605150214593,
+    "n": 932
+  },
+  "vcrag": {
+    "EXACT": 22.532188841201716,
+    "RETRIEVAL_GAP": 22.21030042918455,
+    "SPECIFICITY_MISS": 37.55364806866953,
+    "CLINICAL_ERROR": 17.703862660944207,
+    "wrong_marginal": 24.570815450643778,
+    "n": 932
+  },
+  "paired": {
+    "both": 104,
+    "vcrag_only": 106,
+    "unval_only": 46,
+    "vcrag_win_substantive": 2,
+    "vcrag_win_specificity": 104
+  }
+}

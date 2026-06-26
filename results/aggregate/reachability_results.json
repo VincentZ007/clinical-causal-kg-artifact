@@ -1,0 +1,29 @@
+{
+  "totals": {
+    "H": 3000,
+    "L_weak": 2480,
+    "L_nottestable": 3000
+  },
+  "reachability": {
+    "unvalidated": {
+      "H": 0.6996666666666667,
+      "L_weak": 0.6290322580645161,
+      "L_nottestable": 0.6523333333333333
+    },
+    "assoc": {
+      "H": 0.705,
+      "L_weak": 0.23790322580645162,
+      "L_nottestable": 0.023
+    },
+    "vcrag_temporal": {
+      "H": 0.6373333333333333,
+      "L_weak": 0.0,
+      "L_nottestable": 0.028333333333333332
+    },
+    "vcrag_extractor": {
+      "H": 0.778,
+      "L_weak": 0.0,
+      "L_nottestable": 0.034
+    }
+  }
+}

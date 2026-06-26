@@ -1,0 +1,88 @@
+{
+  "n": 3024,
+  "by_threshold": {
+    "pmids>=1": {
+      "base_rate": 0.4689153439153439,
+      "auc_lift": 0.5585759589831503,
+      "auc_freq": 0.585754100894565,
+      "pr_auc_lift": 0.5323188143411316,
+      "n_pos": 1418
+    },
+    "pmids>=3": {
+      "base_rate": 0.2751322751322751,
+      "auc_lift": 0.5530619977365244,
+      "auc_freq": 0.600157697571589,
+      "pr_auc_lift": 0.3290719276364852,
+      "n_pos": 832
+    },
+    "pmids>=10": {
+      "base_rate": 0.12103174603174603,
+      "auc_lift": 0.53923201223649,
+      "auc_freq": 0.585982825329863,
+      "pr_auc_lift": 0.14685004135741944,
+      "n_pos": 366
+    }
+  },
+  "calibration_by_lift_decile": [
+    {
+      "decile": 0,
+      "lift_median": 0.0,
+      "attest_rate": 0.5445544554455446,
+      "n": 303
+    },
+    {
+      "decile": 1,
+      "lift_median": 0.0,
+      "attest_rate": 0.41721854304635764,
+      "n": 302
+    },
+    {
+      "decile": 2,
+      "lift_median": 0.56,
+      "attest_rate": 0.3344370860927152,
+      "n": 302
+    },
+    {
+      "decile": 3,
+      "lift_median": 1.01,
+      "attest_rate": 0.38613861386138615,
+      "n": 303
+    },
+    {
+      "decile": 4,
+      "lift_median": 1.38,
+      "attest_rate": 0.4304635761589404,
+      "n": 302
+    },
+    {
+      "decile": 5,
+      "lift_median": 1.71,
+      "attest_rate": 0.4205298013245033,
+      "n": 302
+    },
+    {
+      "decile": 6,
+      "lift_median": 2.25,
+      "attest_rate": 0.46534653465346537,
+      "n": 303
+    },
+    {
+      "decile": 7,
+      "lift_median": 3.01,
+      "attest_rate": 0.5364238410596026,
+      "n": 302
+    },
+    {
+      "decile": 8,
+      "lift_median": 4.67,
+      "attest_rate": 0.5496688741721855,
+      "n": 302
+    },
+    {
+      "decile": 9,
+      "lift_median": 14.14,
+      "attest_rate": 0.6039603960396039,
+      "n": 303
+    }
+  ]
+}

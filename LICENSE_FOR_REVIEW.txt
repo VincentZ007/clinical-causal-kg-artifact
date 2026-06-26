@@ -1,0 +1,5 @@
+This repository is provided as an anonymous peer-review artifact.
+
+It does not grant permission to redistribute restricted clinical datasets, UMLS resources, SemMedDB releases, patient-level derived data, prompts, or model outputs generated from clinical records.
+
+An explicit open-source license can be added after the double-anonymous review period.

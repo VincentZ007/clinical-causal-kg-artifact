@@ -1,0 +1,14 @@
+﻿{
+  "dataset": "MIMIC-III",
+  "kg_edges": 35232,
+  "lift_testable_edges": 2318,
+  "lift_supported_edges": 942,
+  "lift_supported_pct_of_testable": 40.6,
+  "semmeddb_covered_edges": 6753,
+  "semmeddb_coverage_pct": 19.2,
+  "temporal_committed_edges": 267,
+  "temporal_commit_pct_of_semmed": 4.0,
+  "extractor_direction_acc_vs_semmed_pct": 70.5,
+  "temporal_direction_acc_vs_semmed_pct": 50.9,
+  "llm_direction_acc_on_temporal_subset_pct": 67.8
+}

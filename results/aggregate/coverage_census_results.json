@@ -1,0 +1,19 @@
+{
+  "n_edges": 16273,
+  "both_dx": 4167,
+  "testable": 3106,
+  "qa_gate": 1098,
+  "pct_testable": 19.086830946967368,
+  "pct_qa_gate": 6.74737294905672,
+  "concepts": 3899,
+  "dx_concepts": 909,
+  "not_testable": 13167,
+  "nt_nondx_endpoint": 12106,
+  "nt_bothdx_nocooccur": 1061,
+  "recur": {
+    "supported_mean_freq": 8.301310043668122,
+    "supported_pct_recur5": 36.24454148471616,
+    "not_testable_mean_freq": 5.092655882129566,
+    "not_testable_pct_recur5": 24.371534897850687
+  }
+}

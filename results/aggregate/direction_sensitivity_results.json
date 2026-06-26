@@ -1,0 +1,25 @@
+{
+  "by_threshold": {
+    "pmids>=1": {
+      "n_gold": 4943,
+      "extractor_acc": 73.57879830062716,
+      "temporal_committed_n": 686,
+      "temporal_acc": 54.22740524781341,
+      "llm_on_committed": 69.38775510204081
+    },
+    "pmids>=3": {
+      "n_gold": 2770,
+      "extractor_acc": 76.13718411552347,
+      "temporal_committed_n": 403,
+      "temporal_acc": 55.33498759305211,
+      "llm_on_committed": 72.45657568238214
+    },
+    "pmids>=10": {
+      "n_gold": 1266,
+      "extractor_acc": 79.30489731437599,
+      "temporal_committed_n": 171,
+      "temporal_acc": 53.801169590643276,
+      "llm_on_committed": 74.26900584795321
+    }
+  }
+}
