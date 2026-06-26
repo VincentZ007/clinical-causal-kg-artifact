@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Figure: the validation recipe funnel (edge counts through each stage) -> paper/fig_funnel.pdf"""
+"""Figure: the support-filtering recipe funnel (edge counts through each stage) -> paper/fig_funnel.pdf"""
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
@@ -9,7 +9,7 @@ plt.rcParams.update({"font.size": 8, "font.family": "DejaVu Sans",
                      "axes.spines.top": False, "axes.spines.right": False})
 stages = ["recurrent surface edges\n(seen in $\\geq$2 notes)",
           "UMLS concept edges\n(synonyms merged)",
-          "EHR lift-supported\n(existence validated)",
+          "EHR lift-supported\n(patient-level support)",
           "+ literature-corroborated\n(high-confidence core)"]
 vals = [42798, 19035, 2047, 886]
 colors = ["#90a4ae", "#4db6ac", "#2e7d32", "#1b5e20"]

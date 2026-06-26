@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Evaluate the 4 systems on the consensus causal-QA subset.
-Correctness = does the predicted condition match the reference cause/effect concept?
+Correctness = does the predicted condition match the reference cause or effect concept?
 We link each predicted answer to a UMLS CUI (scispaCy) and accept a match if the CUI
 equals the reference CUI, or the names are string-equivalent / strongly overlapping."""
 import csv, json, re
@@ -121,8 +121,8 @@ def main():
 
     order = ["closed", "textrag", "semmeddb", "assoc", "unvalidated", "vcrag"]
     label = {"closed": "closed-book", "textrag": "text-RAG", "assoc": "assoc-graph",
-             "semmeddb": "SemMedDB-only", "unvalidated": "unvalidated-causal",
-             "vcrag": "VC-RAG (ours)"}
+             "semmeddb": "SemMedDB-only", "unvalidated": "raw-causal",
+             "vcrag": "lift-supported (ours)"}
 
     def pct(x):
         return "-" if x[1] == 0 else f"{100*x[0]/x[1]:.1f}%"

@@ -1,17 +1,17 @@
 #!/usr/bin/env python3
 """
-Fix (3) — NON-CIRCULAR validation of the lift signal itself (existence half).
+Fix (3): non-circular audit of the lift EHR-support signal.
 
 Circularity worry: the QA benchmark gold is lift>=2-selected, and the winning
-system retrieves the lift-validated graph, so the QA gain could be an artifact of
+system retrieves the lift-supported graph, so the QA gain could be an artifact of
 construction. SemMedDB (PubMed literature predications) is INDEPENDENT of MIMIC
 co-occurrence lift. If lift-supported edges are literature-attested much more
-often than non-supported edges, then lift captures real causal *existence* and is
-not just self-fulfilling.
+often than non-supported edges, then lift provides independent support for
+candidate relations and is not just self-fulfilling.
 
 We test, on the TESTABLE edges only (both endpoints are diagnoses, so lift is
-defined), whether SemMedDB attestation (in EITHER direction = existence, not
-orientation) depends on lift. Reports a 2x2 table, risk/odds ratio, chi-square +
+defined), whether SemMedDB attestation (in either direction, ignoring orientation)
+depends on lift. Reports a 2x2 table, risk/odds ratio, chi-square +
 Fisher, and an attestation-rate-by-lift-bin curve.
 
 Inputs : edges_cui_validated_llm_train.tsv , semmeddb_causal.tsv
@@ -55,7 +55,7 @@ def contrast(hi, lo, label):
 def main():
     e = pd.read_csv(EDGES, sep="\t")
     sem = pd.read_csv(SEM, sep="\t")
-    # existence strength = max PMID support over BOTH orientations (direction-agnostic)
+    # direction-agnostic literature support = max PMID support over both orientations
     pmid = {}
     for a, b, n in zip(sem["cause_cui"], sem["effect_cui"], sem["n_pmids"]):
         pmid[(a, b)] = n
@@ -82,7 +82,7 @@ def main():
     # ---- attestation contrast at increasing PMID-support thresholds ----
     # SemMedDB is noisy (F1~0.5): a single mention is weak; requiring k PMIDs
     # filters reference noise. If lift's edge sharpens as we demand stronger
-    # literature support, that is exactly the existence signal we want.
+    # literature support, that is exactly the independent support pattern we want.
     results = {"contrasts": {}, "by_lift_bin": {}}
     for k in (1, 3, 10):
         t["attested"] = t["sem_strength"] >= k
@@ -124,10 +124,10 @@ def main():
     if not math.isnan(c2_strict["rr"]) and c2_strict["rr"] > 1.3 and c2_strict["p"] < 0.05:
         print(f"  At strong literature support (>=10 PMIDs), lift>=2 edges are attested")
         print(f"  {c2_strict['rr']:.1f}x more often than lift<2 edges on an INDEPENDENT reference.")
-        print("  -> lift tracks real causal EXISTENCE (strongest for well-studied edges);")
+        print("  -> lift tracks independent literature support (strongest for well-studied edges);")
         print("     the QA gain is not pure circularity, though the effect is modest.")
     else:
-        print("  lift's independent existence signal is weak even at strong PMID support.")
+        print("  lift's independent support signal is weak even at strong PMID support.")
 
 
 if __name__ == "__main__":

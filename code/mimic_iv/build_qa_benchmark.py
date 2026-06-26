@@ -3,9 +3,9 @@
 Build the patient-grounded causal QA benchmark from HELD-OUT (test) patients.
 
 DUAL-SIGNAL ground truth. A causal relation is an answer key only if:
-  (a) the treating clinician stated the two concepts as cause/effect in the note
+  (a) the treating clinician stated the two concepts as a cause and effect relation in the note
       (provides the held-out PATIENT grounding), AND
-  (b) the edge is EHR-validated on TRAIN patients: support=='supported' & lift>=MIN_LIFT, AND
+  (b) the edge is EHR-supported on TRAIN patients: support=='supported' & lift>=MIN_LIFT, AND
   (c) it has a DECIDED cross-admission temporal direction (forward/reversed) — and the
       CAUSE/EFFECT orientation is taken from that temporal signal, NOT from the (noisy)
       LLM/physician surface order. (co_coded / bidirectional / insufficient -> dropped:

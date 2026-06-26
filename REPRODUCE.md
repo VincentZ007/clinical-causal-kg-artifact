@@ -34,7 +34,7 @@ The main pipeline follows this order:
 3. Extract causal triples with the LLM.
 4. Parse triples and build surface-form edges.
 5. Link entities to UMLS CUIs.
-6. Validate edge existence with co-occurrence lift.
+6. Filter candidate edges using co-occurrence lift as patient-level EHR support.
 7. Audit direction against temporal order and SemMedDB.
 8. Build and evaluate the causal QA benchmark.
 9. Regenerate figures and paper tables from aggregate results.

@@ -126,7 +126,7 @@ def draw():
     text(c, 381, 239, "Audit each extracted edge against an independent reference", 10.5, C["ink"], True, "center")
 
     rows = [
-        (232, 180, C["green_fill"], C["green"], "Co-occurrence lift", "existence signal", "WORKS", "removes spurious co-mentions"),
+        (232, 180, C["green_fill"], C["green"], "Co-occurrence lift", "EHR support", "USEFUL", "filters unsupported co-mentions"),
         (232, 119, C["red_fill"], C["red"], "Coding-order time", "direction signal", "FAILS", "54.2% vs 73.6%; coding time != onset"),
         (232, 58, C["amber_fill"], C["amber"], "Literature corroboration", "direction + confidence", "PARTIAL", "74% agreement; ~30% edge coverage"),
     ]
@@ -142,11 +142,11 @@ def draw():
 
     # Audit takeaway
     round_rect(c, 250, 27, 254, 20, r=10, fill=colors.white, stroke=C["line"], lw=0.8)
-    text(c, 377, 33, "Existence is cheap to validate; direction remains uncertain", 7.9, C["ink"], True, "center")
+    text(c, 377, 33, "EHR support is screenable; direction remains uncertain", 7.9, C["ink"], True, "center")
 
     # Apply lane
     round_rect(c, 600, 204, 121, 42, r=8, fill=C["green_fill"], stroke=hex_color("#91caa7"))
-    text(c, 660.5, 226, "Lift-validated", 8.8, C["green"], True, "center")
+    text(c, 660.5, 226, "Lift-supported", 8.8, C["green"], True, "center")
     text(c, 660.5, 214, "causal KG", 8.8, C["green"], True, "center")
     arrow(c, 660.5, 197, 660.5, 178, hex_color("#91caa7"))
 
@@ -160,11 +160,11 @@ def draw():
     text(c, 660.5, 82, "causal answer", 7.4, C["muted"], False, "center")
 
     round_rect(c, 592, 43, 138, 20, r=10, fill=hex_color("#f0fff4"), stroke=hex_color("#91caa7"), lw=0.8)
-    text(c, 661, 49, "+7.9 pts vs unvalidated graph", 7.4, C["green"], True, "center")
+    text(c, 661, 49, "+7.9 pts vs raw graph", 7.4, C["green"], True, "center")
 
     # Bottom banner
     round_rect(c, 56, 8, 648, 18, r=9, fill=hex_color("#fbfcfe"), stroke=C["line"], lw=0.8)
-    text(c, 380, 14, "Recommendation: validate existence with co-occurrence lift; do not orient edges by diagnosis-coding order.", 7.7, C["ink"], True, "center")
+    text(c, 380, 14, "Recommendation: use lift as EHR support; do not orient edges by diagnosis-coding order.", 7.7, C["ink"], True, "center")
 
     c.showPage()
     c.save()

@@ -15,7 +15,7 @@ OUT = "/media/lansu/Expansion/PHD/causal-kg/paper"
 MUTED, HILITE, BAD = "#9e9e9e", "#2e7d32", "#c62828"
 
 # ---- Fig 2: QA overall correctness ----
-sys = ["closed-\nbook", "text-\nRAG", "assoc-\ngraph", "unvalid-\nated", "lift-valid.\n(ours)"]
+sys = ["closed-\nbook", "text-\nRAG", "assoc-\ngraph", "raw causal\nKG", "lift-supported\nKG"]
 ov = [15.8, 12.9, 25.9, 25.9, 33.8]
 colors = [MUTED, MUTED, MUTED, "#607d8b", HILITE]
 fig, ax = plt.subplots(figsize=(3.4, 2.1))

@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
-A — domain-of-definition census for the lift existence-validator.
+A domain-of-definition census for the lift EHR-support signal.
 
 Answers, with exact counts: on what fraction of the 16,273-edge KG is co-occurrence lift
 even DEFINED, and why are the rest excluded? Purpose is REACH, not accuracy. The headline
-is that the lift signal (and therefore the lift-validated graph) applies to a narrow slice,
+is that the lift signal (and therefore the lift-supported graph) applies to a narrow slice,
 so it must be treated as a soft tier on a sub-domain, not a global filter.
 
 Three-cause exclusion funnel:

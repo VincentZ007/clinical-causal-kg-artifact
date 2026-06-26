@@ -2,7 +2,7 @@
 """
 UMLS entity linking for the causal KG.
 
-Pipeline: dedup cause/effect phrases -> drop obvious fragments (concept pre-filter)
+Pipeline: dedup cause and effect phrases -> drop obvious fragments (concept pre-filter)
 -> scispaCy CandidateGenerator -> accept best CUI if cosine sim >= THRESH and the
 concept's semantic types are not in a non-clinical blocklist -> rebuild the KG with
 CUI nodes (merging surface-form synonyms) -> report connectivity before/after.

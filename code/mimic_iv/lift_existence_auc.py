@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """
-E5 — lift as an INDEPENDENT existence discriminator (single-number effect size).
+E5: lift as an independent support discriminator (single-number effect size).
 
 Turns the modest RR ladder from lift_vs_semmeddb.py into a calibrated discrimination
 claim: ROC-AUC / PR-AUC of within-admission lift predicting SemMedDB literature
-attestation (existence, either direction), at increasing PMID-support thresholds, with
+attestation (either direction), at increasing PMID-support thresholds, with
 raw edge frequency as a discrimination baseline. Honest expectation: AUC is MODEST
 (lift only weakly separates; base attestation ~42% at lift<=1) -- which IS the thesis
-('existence is checkable, but modestly and narrowly').
+('EHR support is screenable, but modestly and narrowly').
 
 Inputs : edges_cui_validated_llm_train.tsv , semmeddb_causal.tsv
 Output : lift_existence_auc_results.json + calibration arrays for the figure
@@ -105,8 +105,8 @@ def main():
     print(f"\nwrote {OUT}")
     a1 = res["by_threshold"]["pmids>=1"]["auc_lift"]
     print(f"\nINTERPRETATION: lift discriminates literature-attested edges with AUC~{a1:.2f} "
-          f"(>=1 PMID).\n  A modest but real, INDEPENDENT existence signal -- not clean separation. "
-          f"On-thesis: existence is checkable, modestly.")
+          f"(>=1 PMID).\n  A modest but real, independent support signal, not clean separation. "
+          f"On thesis: EHR support is screenable, modestly.")
 
 
 if __name__ == "__main__":
