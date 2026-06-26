@@ -1,8 +1,10 @@
-# Anonymous artifact for PRICAI 2026 review
+# Anonymous clinical causal KG artifact
 
 This repository contains the code, paper source, figures, and aggregate results for the submitted manuscript.
 
 The repository intentionally does not include MIMIC, PhysioNet, UMLS, SemMedDB, patient-level prompts, note text, patient identifiers, or derived patient-level benchmark files. Those materials inherit access restrictions from the original datasets.
+
+The artifact is intended for double-anonymous review. Please use the anonymized mirror link rather than the source GitHub URL when citing this repository during review.
 
 ## What is included
 
