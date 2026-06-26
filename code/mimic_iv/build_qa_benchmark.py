@@ -21,8 +21,8 @@ from collections import Counter, defaultdict
 from scispacy.candidate_generation import CandidateGenerator, UmlsKnowledgeBase
 from link_umls import is_concept, best_candidate, JUNK_TYPES
 
-BASE = "/media/lansu/Expansion/PHD/causal-kg"
-HOSP = "/media/lansu/Expansion/PHD/MIMIC/physionet.org/files/mimiciv/3.1/hosp"
+BASE = "."
+HOSP = "/path/to/MIMIC/physionet.org/files/mimiciv/3.1/hosp"
 SPLIT = f"{BASE}/patient_split.tsv"
 TRIPLES = f"{BASE}/llm_triples.jsonl"
 ICD2CUI = f"{BASE}/icd2cui.tsv"

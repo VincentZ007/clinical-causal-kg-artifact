@@ -12,9 +12,9 @@ from collections import Counter, defaultdict
 import networkx as nx
 from scispacy.candidate_generation import CandidateGenerator, UmlsKnowledgeBase
 
-EDGES = "/media/lansu/Expansion/PHD/causal-kg/edges_sectioned.tsv"
-MAP_OUT = "/media/lansu/Expansion/PHD/causal-kg/phrase2cui.tsv"
-CUI_EDGES = "/media/lansu/Expansion/PHD/causal-kg/edges_cui.tsv"
+EDGES = "./edges_sectioned.tsv"
+MAP_OUT = "./phrase2cui.tsv"
+CUI_EDGES = "./edges_cui.tsv"
 THRESH = 0.80
 BATCH = 4000
 

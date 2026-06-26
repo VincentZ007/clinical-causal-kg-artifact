@@ -13,7 +13,7 @@ import csv, json, gzip, re
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import linear_kernel
 
-BASE = "/media/lansu/Expansion/PHD/causal-kg"
+BASE = "."
 SPLIT = f"{BASE}/patient_split.tsv"
 CORPUS = f"{BASE}/full_input.jsonl.gz"
 BENCH = f"{BASE}/causal_qa_benchmark.jsonl"

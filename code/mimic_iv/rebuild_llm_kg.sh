@@ -3,7 +3,7 @@
 # rule version. Run AFTER fetch_results.sh has pulled triples_llm.jsonl.
 # All outputs use the _llm suffix, so the rule-version files are left intact.
 set -e
-cd /media/lansu/Expansion/PHD/causal-kg
+cd .
 R="conda run -n causal-kg python"
 
 echo "=== [1/5] parse LLM raw -> triples + edges_sectioned_llm.tsv ==="

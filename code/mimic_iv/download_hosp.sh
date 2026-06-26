@@ -5,7 +5,7 @@
 set -euo pipefail
 
 USER_ID="${1:?usage: bash download_hosp.sh <physionet_username>}"
-DEST="/media/lansu/Expansion/PHD/MIMIC"
+DEST="/path/to/MIMIC"
 BASE="https://physionet.org/files/mimiciv/3.1/hosp"
 FILES=(
   admissions.csv.gz

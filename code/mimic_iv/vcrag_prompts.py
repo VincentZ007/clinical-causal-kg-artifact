@@ -15,7 +15,7 @@ Output: prompts.jsonl  {qid,type,system,anchor_cui,reference_cui,reference_name,
 import csv, json
 from collections import defaultdict
 
-BASE = "/media/lansu/Expansion/PHD/causal-kg"
+BASE = "."
 BENCH = f"{BASE}/causal_qa_benchmark.jsonl"
 RAW = f"{BASE}/edges_cui_llm_train.tsv"            # unvalidated directed
 ASSOC = f"{BASE}/edges_cui_validated_llm_train.tsv"  # lift (symmetric)

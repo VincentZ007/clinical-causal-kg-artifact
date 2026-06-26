@@ -18,7 +18,7 @@ after job 25105 for the de-circularized version.
 import json
 from collections import defaultdict, Counter
 
-BASE = "/media/lansu/Expansion/PHD/causal-kg"
+BASE = "."
 meta = {}
 for l in open(f"{BASE}/causal_qa_benchmark.jsonl"):
     x = json.loads(l)

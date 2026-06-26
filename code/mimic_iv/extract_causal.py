@@ -122,9 +122,9 @@ def extract(text, sectioned=False, drop_second_person=False):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--gz", default="/media/lansu/Expansion/PHD/MIMIC/physionet.org/files/mimic-iv-note/2.2/note/discharge.csv.gz")
+    ap.add_argument("--gz", default="/path/to/MIMIC/physionet.org/files/mimic-iv-note/2.2/note/discharge.csv.gz")
     ap.add_argument("--n", type=int, default=1500, help="number of notes to sample")
-    ap.add_argument("--out", default="/media/lansu/Expansion/PHD/causal-kg/triples_sample.jsonl")
+    ap.add_argument("--out", default="./triples_sample.jsonl")
     args = ap.parse_args()
 
     n = 0

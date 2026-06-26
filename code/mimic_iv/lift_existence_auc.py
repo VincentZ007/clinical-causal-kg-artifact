@@ -15,7 +15,7 @@ Output : lift_existence_auc_results.json + calibration arrays for the figure
 import json
 import pandas as pd
 
-BASE = "/media/lansu/Expansion/PHD/causal-kg"
+BASE = "."
 EDGES = f"{BASE}/edges_cui_validated_llm_train.tsv"
 SEM = f"{BASE}/semmeddb_causal.tsv"
 OUT = f"{BASE}/lift_existence_auc_results.json"

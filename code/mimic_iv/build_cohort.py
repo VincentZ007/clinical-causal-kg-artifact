@@ -13,9 +13,9 @@ Stdlib csv stream for the big notes file; pandas for the structured tables.
 import gzip, csv
 import pandas as pd
 
-HOSP = "/media/lansu/Expansion/PHD/MIMIC/physionet.org/files/mimiciv/3.1/hosp"
-NOTE = "/media/lansu/Expansion/PHD/MIMIC/physionet.org/files/mimic-iv-note/2.2/note/discharge.csv.gz"
-OUT = "/media/lansu/Expansion/PHD/causal-kg/cohort.csv.gz"
+HOSP = "/path/to/MIMIC/physionet.org/files/mimiciv/3.1/hosp"
+NOTE = "/path/to/MIMIC/physionet.org/files/mimic-iv-note/2.2/note/discharge.csv.gz"
+OUT = "./cohort.csv.gz"
 csv.field_size_limit(10**9)
 
 ELECTIVE = {"ELECTIVE", "SURGICAL SAME DAY ADMISSION"}

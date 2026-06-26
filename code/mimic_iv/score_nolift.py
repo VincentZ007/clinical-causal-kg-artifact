@@ -12,7 +12,7 @@ import json, re
 from collections import defaultdict, Counter
 from math import comb
 
-BASE = "/media/lansu/Expansion/PHD/causal-kg"
+BASE = "."
 ANS = f"{BASE}/answers_nolift.jsonl"
 CAND = f"{BASE}/candidates_nolift.jsonl"
 BENCH = f"{BASE}/causal_qa_nolift_sample.jsonl"

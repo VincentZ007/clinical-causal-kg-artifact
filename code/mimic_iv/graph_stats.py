@@ -4,9 +4,9 @@ import csv
 import networkx as nx
 from collections import Counter
 
-KG = "/media/lansu/Expansion/PHD/causal-kg/edges_cui.tsv"
-MAP = "/media/lansu/Expansion/PHD/causal-kg/phrase2cui.tsv"
-VAL = "/media/lansu/Expansion/PHD/causal-kg/edges_cui_validated.tsv"
+KG = "./edges_cui.tsv"
+MAP = "./phrase2cui.tsv"
+VAL = "./edges_cui_validated.tsv"
 
 # UMLS semantic-group lookup (major TUIs)
 GROUP = {}

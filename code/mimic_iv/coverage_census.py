@@ -17,7 +17,7 @@ Output: coverage_census_results.json + stdout
 import csv, json
 import pandas as pd
 
-BASE = "/media/lansu/Expansion/PHD/causal-kg"
+BASE = "."
 EDGES = f"{BASE}/edges_cui_validated_llm_train.tsv"
 ICD2CUI = f"{BASE}/icd2cui.tsv"
 OUT = f"{BASE}/coverage_census_results.json"

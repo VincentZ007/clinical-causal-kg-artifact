@@ -3,8 +3,8 @@
 gzip-compressed for transfer to the GPU node."""
 import gzip, csv, json, re
 csv.field_size_limit(10**9)
-NOTE = "/media/lansu/Expansion/PHD/MIMIC/physionet.org/files/mimic-iv-note/2.2/note/discharge.csv.gz"
-OUT = "/media/lansu/Expansion/PHD/causal-kg/full_input.jsonl.gz"
+NOTE = "/path/to/MIMIC/physionet.org/files/mimic-iv-note/2.2/note/discharge.csv.gz"
+OUT = "./full_input.jsonl.gz"
 SEC = re.compile(r"(?m)^[ \t]*([A-Z][A-Za-z][A-Za-z /()\-]{2,45}):")
 KEEP = ("history of present illness", "brief hospital course", "hospital course")
 

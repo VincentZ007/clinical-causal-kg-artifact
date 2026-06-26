@@ -41,6 +41,16 @@ The main pipeline follows this order:
 
 The scripts in `code/mimic_iv/` implement these steps.
 
+The final QA comparison uses `vcrag_causal_prompts.py` and `eval_liftonly.py`.
+The key controlled condition is:
+
+```bash
+python code/mimic_iv/vcrag_causal_prompts.py --base liftonly --mode demote ...
+python code/mimic_iv/eval_liftonly.py ...
+```
+
+This evaluates the lift-only retrieval baseline and a conservative causal-demotion variant. The demotion variant preserves the retrieved candidate set and only changes evidence order, so its main interpretation is hallucination reduction at fixed retrieval recall rather than proof of causal truth.
+
 ## 4. MIMIC-III external replication
 
 Use the runbook in `code/mimic_iii/MIMIC3_HPC_RUNBOOK_CN.md`.

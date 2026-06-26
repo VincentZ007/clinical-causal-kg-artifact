@@ -4,7 +4,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-OUT = "/media/lansu/Expansion/PHD/causal-kg/paper"
+OUT = "./paper"
 plt.rcParams.update({"font.size": 8, "font.family": "DejaVu Sans",
                      "axes.spines.top": False, "axes.spines.right": False})
 stages = ["recurrent surface edges\n(seen in $\\geq$2 notes)",

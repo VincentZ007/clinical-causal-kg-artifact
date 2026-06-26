@@ -22,3 +22,9 @@ The artifact is intended for double-anonymous review. Please use the anonymized 
 4. Compile `paper/main.tex` with the included LNCS files.
 
 The scripts regenerate the restricted intermediate files locally after the user obtains the required dataset credentials.
+
+## Current aggregate QA result
+
+The main downstream result is the lift-only retrieval baseline plus conservative causal demotion. The demotion step keeps the same top-12 retrieved candidates, but moves candidates that fail the causal screen to the end of the evidence list. It is an evidence-ordering step, not a claim that the remaining candidates are proven causal.
+
+On the held-out causal-QA subset, lift-only retrieval reaches 35.7% overall accuracy and 86.3% retrieval recall. Adding causal demotion reaches 37.2% overall accuracy, keeps recall at 86.3%, and reduces unsupported hallucinated answers from 17.3% to 6.1%. The overall accuracy gain is a positive but non-significant trend; the robust effect is the hallucination reduction.

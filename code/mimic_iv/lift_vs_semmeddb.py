@@ -21,7 +21,7 @@ import json
 import math
 import pandas as pd
 
-BASE = "/media/lansu/Expansion/PHD/causal-kg"
+BASE = "."
 EDGES = f"{BASE}/edges_cui_validated_llm_train.tsv"
 SEM = f"{BASE}/semmeddb_causal.tsv"
 OUT = f"{BASE}/lift_vs_semmeddb_results.json"

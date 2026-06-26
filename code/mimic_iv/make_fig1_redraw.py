@@ -5,8 +5,8 @@ from reportlab.pdfgen import canvas
 from reportlab.lib import colors
 
 
-OUT = Path("ickg_paper/fig1_redraw.pdf")
-PNG = Path("ickg_paper/fig1_redraw_preview.png")
+OUT = Path("paper/fig1.pdf")
+PNG = Path("paper/fig1_preview.png")
 W, H = 760, 300
 
 
@@ -80,8 +80,8 @@ def arrow(c, x1, y1, x2, y2, color=None, lw=1.6):
 def draw():
     OUT.parent.mkdir(parents=True, exist_ok=True)
     c = canvas.Canvas(str(OUT), pagesize=(W, H))
-    c.setTitle("Fig. 1 Overview redraw")
-    c.setAuthor("Anonymous")
+    c.setTitle("")
+    c.setAuthor("")
 
     # Background
     c.setFillColor(colors.white)
@@ -160,7 +160,7 @@ def draw():
     text(c, 660.5, 82, "causal answer", 7.4, C["muted"], False, "center")
 
     round_rect(c, 592, 43, 138, 20, r=10, fill=hex_color("#f0fff4"), stroke=hex_color("#91caa7"), lw=0.8)
-    text(c, 661, 49, "+7.9 pts vs raw graph", 7.4, C["green"], True, "center")
+    text(c, 661, 49, "support-aware QA", 7.4, C["green"], True, "center")
 
     # Bottom banner
     round_rect(c, 56, 8, 648, 18, r=9, fill=hex_color("#fbfcfe"), stroke=C["line"], lw=0.8)

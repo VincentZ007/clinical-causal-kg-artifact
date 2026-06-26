@@ -2,8 +2,8 @@
 """Build a compact pilot input for the LLM extractor: clinical sections per note."""
 import gzip, csv, json, re, sys
 csv.field_size_limit(10**9)
-NOTE = "/media/lansu/Expansion/PHD/MIMIC/physionet.org/files/mimic-iv-note/2.2/note/discharge.csv.gz"
-OUT = "/media/lansu/Expansion/PHD/causal-kg/pilot_input.jsonl"
+NOTE = "/path/to/MIMIC/physionet.org/files/mimic-iv-note/2.2/note/discharge.csv.gz"
+OUT = "./pilot_input.jsonl"
 N = int(sys.argv[1]) if len(sys.argv) > 1 else 500
 SEC = re.compile(r"(?m)^[ \t]*([A-Z][A-Za-z][A-Za-z /()\-]{2,45}):")
 KEEP = ("history of present illness", "brief hospital course", "hospital course")

@@ -12,7 +12,7 @@ import csv
 from collections import Counter
 from math import comb
 
-B = "/media/lansu/Expansion/PHD/causal-kg"
+B = "."
 rows = list(csv.DictReader(open(f"{B}/semmeddb_vs_temporal.tsv"), delimiter="\t"))
 dec = [r for r in rows if r["sem_direction"] in ("forward", "reversed")]
 print(f"KG edges with SemMedDB causal evidence: {len(rows)}  (directionally decided: {len(dec)})")

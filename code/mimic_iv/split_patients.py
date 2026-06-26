@@ -3,8 +3,8 @@
 Split by subject_id so no patient appears in both KG construction and QA.
 test = subject_id % 100 < 15  (~15% held out). Writes patient_split.tsv."""
 import csv, gzip
-COHORT = "/media/lansu/Expansion/PHD/causal-kg/cohort.csv.gz"
-OUT = "/media/lansu/Expansion/PHD/causal-kg/patient_split.tsv"
+COHORT = "./cohort.csv.gz"
+OUT = "./patient_split.tsv"
 TEST_PCT = 15
 
 subj_split = {}

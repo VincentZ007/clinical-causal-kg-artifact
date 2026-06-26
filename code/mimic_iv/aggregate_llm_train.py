@@ -5,7 +5,7 @@ train subjects, re-counts (cause,effect) freq. Writes the full train edge set
 and the freq>=2 floor used to build the KG."""
 import csv, json
 from collections import Counter
-BASE = "/media/lansu/Expansion/PHD/causal-kg"
+BASE = "."
 SPLIT = f"{BASE}/patient_split.tsv"
 TRIPLES = f"{BASE}/llm_triples.jsonl"
 OUT_ALL = f"{BASE}/edges_sectioned_llm_train.tsv"

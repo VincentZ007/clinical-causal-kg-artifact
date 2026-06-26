@@ -6,7 +6,7 @@ import os, csv
 import pandas as pd
 import networkx as nx
 
-BASE = "/media/lansu/Expansion/PHD/causal-kg"
+BASE = "."
 
 def count_rows(p):
     return sum(1 for _ in open(p)) - 1 if os.path.exists(p) else None

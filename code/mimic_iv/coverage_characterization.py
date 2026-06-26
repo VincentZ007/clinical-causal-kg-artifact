@@ -15,7 +15,7 @@ import json
 import pandas as pd
 from collections import Counter
 
-BASE = "/media/lansu/Expansion/PHD/causal-kg"
+BASE = "."
 KG = f"{BASE}/edges_final_llm_train.tsv"
 SEM = f"{BASE}/semmeddb_causal.tsv"
 OUT = f"{BASE}/coverage_characterization_results.json"

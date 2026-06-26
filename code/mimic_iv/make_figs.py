@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Paper data figures (vector PDF, single-column width).
-fig_qa.pdf    : 5-system causal-QA overall correctness (ours highlighted)
+fig_qa.pdf    : causal-QA overall correctness (final system highlighted)
 fig_audit.pdf : direction-signal audit vs SemMedDB (the negative result)"""
+from pathlib import Path
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
@@ -11,24 +12,31 @@ plt.rcParams.update({
     "axes.spines.right": False, "axes.linewidth": 0.7, "xtick.major.size": 0,
     "ytick.major.width": 0.7, "figure.dpi": 200,
 })
-OUT = "/media/lansu/Expansion/PHD/causal-kg/paper"
-MUTED, HILITE, BAD = "#9e9e9e", "#2e7d32", "#c62828"
+OUT = Path("paper")
+OUT.mkdir(parents=True, exist_ok=True)
+MUTED, HILITE, BAD, BLUE = "#9e9e9e", "#2e7d32", "#c62828", "#607d8b"
 
 # ---- Fig 2: QA overall correctness ----
-sys = ["closed-\nbook", "text-\nRAG", "assoc-\ngraph", "raw causal\nKG", "lift-supported\nKG"]
-ov = [15.8, 12.9, 25.9, 25.9, 33.8]
-colors = [MUTED, MUTED, MUTED, "#607d8b", HILITE]
-fig, ax = plt.subplots(figsize=(3.4, 2.1))
-bars = ax.bar(range(5), ov, color=colors, width=0.68, edgecolor="white", linewidth=0.5)
+sys = ["Closed", "Text", "SemMed", "Assoc",
+       "Raw", "Temp.", "Lift", "Demote"]
+ov = [15.8, 12.9, 19.2, 25.9, 25.9, 35.6, 35.7, 37.2]
+colors = [MUTED, MUTED, MUTED, MUTED, BLUE, "#80a6bc", "#6aa783", HILITE]
+fig, ax = plt.subplots(figsize=(3.45, 2.15))
+bars = ax.bar(range(len(ov)), ov, color=colors, width=0.66, edgecolor="white", linewidth=0.5)
 for i, v in enumerate(ov):
     ax.text(i, v + 0.6, f"{v:.1f}", ha="center", va="bottom", fontsize=7.5,
-            fontweight="bold" if i == 4 else "normal")
-ax.set_xticks(range(5)); ax.set_xticklabels(sys, fontsize=7)
-ax.set_ylabel("causal-QA correctness (%)"); ax.set_ylim(0, 40)
-ax.axhline(ov[3], ls=":", lw=0.8, color="#607d8b", zorder=0)
-ax.annotate("+7.9\n(p<1e-6)", xy=(4, 33.8), xytext=(3.05, 36.5), fontsize=7, color=HILITE,
+            fontweight="bold" if i == len(ov) - 1 else "normal")
+ax.set_xticks(range(len(ov))); ax.set_xticklabels(sys, fontsize=6.2)
+ax.set_ylabel("causal-QA correctness (%)"); ax.set_ylim(0, 42)
+ax.axhline(ov[6], ls=":", lw=0.8, color="#6aa783", zorder=0)
+ax.annotate("+1.5", xy=(7, 37.2), xytext=(6.15, 40.0), fontsize=7, color=HILITE,
             ha="center", arrowprops=dict(arrowstyle="->", color=HILITE, lw=0.8))
-fig.tight_layout(pad=0.3); fig.savefig(f"{OUT}/fig_qa.pdf", bbox_inches="tight"); fig.savefig(f"{OUT}/fig_qa.png", bbox_inches="tight", dpi=200); plt.close(fig)
+ax.text(0.10, 39.0, "Hall. 17.3 -> 6.1", fontsize=6.2, color=HILITE,
+        ha="left", va="center")
+fig.tight_layout(pad=0.3)
+fig.savefig(OUT / "fig_qa.pdf", bbox_inches="tight", metadata={"Creator": "", "Producer": "", "Title": "", "Author": ""})
+fig.savefig(OUT / "fig_qa.png", bbox_inches="tight", dpi=200)
+plt.close(fig)
 
 # ---- Fig 3: direction audit (negative result) ----
 fig, (a1, a2) = plt.subplots(1, 2, figsize=(3.5, 2.05), gridspec_kw={"width_ratios": [1.3, 1]})
@@ -51,6 +59,9 @@ a2.text(0.30, 102, "false\nreversal", ha="left", va="center", fontsize=6.2, colo
 a2.text(0.30, 254, "true\ncorrection", ha="left", va="center", fontsize=6.2, color=HILITE)
 a2.set_xticks([0]); a2.set_xticklabels(["temporal\n'reversed' calls"], fontsize=7)
 a2.set_ylabel("# edges"); a2.set_ylim(0, 340); a2.set_xlim(-0.55, 1.5)
-fig.tight_layout(pad=0.3); fig.savefig(f"{OUT}/fig_audit.pdf", bbox_inches="tight"); fig.savefig(f"{OUT}/fig_audit.png", bbox_inches="tight", dpi=200); plt.close(fig)
+fig.tight_layout(pad=0.3)
+fig.savefig(OUT / "fig_audit.pdf", bbox_inches="tight", metadata={"Creator": "", "Producer": "", "Title": "", "Author": ""})
+fig.savefig(OUT / "fig_audit.png", bbox_inches="tight", dpi=200)
+plt.close(fig)
 
 print("wrote paper/fig_qa.pdf and paper/fig_audit.pdf")

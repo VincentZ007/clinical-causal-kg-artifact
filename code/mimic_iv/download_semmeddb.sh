@@ -9,8 +9,8 @@
 # then:  bash download_semmeddb.sh
 #
 set -e
-export PYSTOW_HOME=/media/lansu/Expansion/PHD/.pystow
-cd /media/lansu/Expansion/PHD/causal-kg
+export PYSTOW_HOME=$HOME/.cache/pystow
+cd .
 
 echo "[1/2] downloading SemMedDB PREDICATION (semmedVER43_2021_R, several GB; 10-30 min)..."
 P=$(conda run -n causal-kg python -c "import umls_downloader as u; print(u.download_semmeddb_predication())" | tail -1)

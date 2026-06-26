@@ -7,7 +7,7 @@ from collections import defaultdict
 from scispacy.candidate_generation import CandidateGenerator, UmlsKnowledgeBase
 from link_umls import is_concept, best_candidate
 
-B = "/media/lansu/Expansion/PHD/causal-kg"
+B = "."
 def norm(s):
     s = s.lower().strip(); s = re.sub(r"[^a-z0-9 ]", " ", s); return re.sub(r"\s+", " ", s).strip()
 

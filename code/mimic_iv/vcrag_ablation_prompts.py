@@ -7,7 +7,7 @@ Emits prompts_ablation.jsonl (+ appends candidates to candidates_ablation.jsonl)
 import csv, json
 from collections import defaultdict
 
-BASE = "/media/lansu/Expansion/PHD/causal-kg"
+BASE = "."
 BENCH = f"{BASE}/causal_qa_benchmark.jsonl"
 VAL = f"{BASE}/edges_final_llm_train.tsv"
 OUT = f"{BASE}/prompts_ablation.jsonl"

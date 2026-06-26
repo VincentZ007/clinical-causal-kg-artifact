@@ -56,9 +56,9 @@ def global_stats(edges):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--edges", default="/media/lansu/Expansion/PHD/causal-kg/edges_sectioned.tsv")
-    ap.add_argument("--dist_out", default="/media/lansu/Expansion/PHD/causal-kg/degree_dist.csv")
-    ap.add_argument("--hc_out", default="/media/lansu/Expansion/PHD/causal-kg/edges_hc.tsv")
+    ap.add_argument("--edges", default="./edges_sectioned.tsv")
+    ap.add_argument("--dist_out", default="./degree_dist.csv")
+    ap.add_argument("--hc_out", default="./edges_hc.tsv")
     args = ap.parse_args()
 
     print("===== global structure at frequency thresholds =====")
