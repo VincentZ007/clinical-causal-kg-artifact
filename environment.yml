@@ -1,4 +1,4 @@
-name: ickg-pricai
+name: ickg-review
 channels:
   - conda-forge
   - pytorch

@@ -8,7 +8,7 @@ Create the environment:
 
 ```bash
 conda env create -f environment.yml
-conda activate ickg-pricai
+conda activate ickg-review
 ```
 
 For GPU extraction, install a vLLM build compatible with your cluster CUDA version if the environment solver does not install it cleanly.
