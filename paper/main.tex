@@ -65,8 +65,8 @@ The main value of the study is diagnostic: it identifies which validation signal
 \begin{table}[t]\centering\caption{Positioning vs.\ representative prior work along five axes ($\checkmark$~yes, $\sim$~partial, $\times$~no). GraphCare / Medical Graph RAG use associative or ontology edges; CausalRAG is general-domain; literature-derived causal KGs are not mined from patient narratives and do not audit edge direction, even when they use EMR filtering or EHR case-study evaluation. Ours mines directed causal edges from patient notes, validates them with co-occurrence lift, audits direction against SemMedDB, and defines a causal QA benchmark.}\label{tab:position}
 \setlength{\tabcolsep}{2pt}\footnotesize
 \begin{tabular}{lccccc}\toprule
- & causal & patient & EHR & direction & QA \\
- & edges & text & validated & audited & benchmark \\\midrule
+ & Causal & Patient & EHR & Direction & QA \\
+ & Edges & Text & Validated & Audited & Benchmark \\\midrule
 GraphCare~\cite{jiang2024graphcare}, Med.\ GraphRAG~\cite{medgraphrag2024} & $\times$ & $\sim$ & $\times$ & $\times$ & $\times$ \\
 CausalRAG~\cite{wang2025causalrag} & $\checkmark$ & $\times$ & $\times$ & $\times$ & $\times$ \\
 Lit.\ causal KGs~\cite{kilicoglu2012semmeddb,nordon2019building,lyu2023dnkg,ade2026causalkg} & $\checkmark$ & $\times$ & $\sim$ & $\times$ & $\times$ \\
@@ -80,13 +80,13 @@ Lit.\ causal KGs~\cite{kilicoglu2012semmeddb,nordon2019building,lyu2023dnkg,ade2
 
 \begin{table}[t]\centering\caption{KG construction on the full pre-split corpus: rule vs.\ LLM extraction.}\label{tab:kg}\footnotesize
 \begin{tabular}{lrr}\toprule
-metric & rule-based & LLM (ours) \\\midrule
-raw surface edges & 142{,}890 & 1{,}173{,}644 \\
-UMLS link rate & 21.9\% & 49.3\% \\
+Metric & Rule-based & LLM (ours) \\\midrule
+Raw surface edges & 142{,}890 & 1{,}173{,}644 \\
+UMLS link rate & 21.9\% & \textbf{49.3\%} \\
 CUI nodes & 8{,}572 & 4{,}318 \\
 CUI edges & 19{,}171 & 19{,}035 \\
-giant component & 92.3\% & 97.1\% \\
-lift-supported edges & 736 & 2{,}047 \\\bottomrule
+Giant component & 92.3\% & \textbf{97.1\%} \\
+Lift-supported edges & 736 & \textbf{2{,}047} \\\bottomrule
 \end{tabular}\end{table}
 
 \section{The Validation Audit}\label{sec:audit}
@@ -102,9 +102,9 @@ We hypothesized that across admissions a cause is coded \emph{before} its effect
 
 \begin{table}[t]\centering\caption{Direction-signal accuracy vs.\ SemMedDB ($n=4{,}943$ edges). Temporal precedence abstains on 86\% of edges; on the 686 where it commits it is below the extractor's own direction and near chance.}\label{tab:audit}\footnotesize
 \begin{tabular}{lc}\toprule
-direction signal & acc.\ vs.\ SemMedDB \\\midrule
-raw LLM extraction direction & \textbf{73.6\%} \\
-temporal precedence (committed, $n{=}686$) & \textbf{54.2\%} \\
+Direction signal & Acc.\ vs.\ SemMedDB \\\midrule
+Raw LLM extraction direction & \textbf{73.6\%} \\
+Temporal precedence (committed, $n{=}686$) & 54.2\% \\
 \quad LLM direction on those 686 & 69.4\% \\\bottomrule
 \end{tabular}\end{table}
 
@@ -158,13 +158,13 @@ For the graph systems, retrieval is direction-aware: a WHY question pulls the \e
 \begin{table}[t]\centering\caption{Causal QA on held-out patients (\%). $n=932$ paired.}\label{tab:qa}\footnotesize
 \setlength{\tabcolsep}{6pt}
 \begin{tabular}{lccccc}\toprule
-system & WHY & WHATCAUSES & Overall & Faith. & Hall. \\\midrule
-1~closed-book & 22.5 & 9.0 & 15.8 & n/a & n/a \\
-2~text-RAG & 18.2 & 7.5 & 12.9 & n/a & n/a \\
-3~SemMedDB-only & 24.9 & 13.5 & 19.2 & 83.8 & 16.2 \\
-4~assoc-graph & 35.4 & 16.3 & 25.9 & 73.9 & 26.1 \\
-5~unvalidated-causal & 34.3 & 17.4 & 25.9 & 82.6 & 17.4 \\
-\textbf{6~lift-validated (ours)} & \textbf{45.3} & \textbf{22.3} & \textbf{33.8} & 80.7 & 19.3 \\\bottomrule
+System & WHY & WHATCAUSES & Overall & Faith. & Hall. \\\midrule
+1~Closed-book & 22.5 & 9.0 & 15.8 & N/A & N/A \\
+2~Text-RAG & 18.2 & 7.5 & 12.9 & N/A & N/A \\
+3~SemMedDB-only & 24.9 & 13.5 & 19.2 & \textbf{83.8} & \textbf{16.2} \\
+4~Assoc-graph & 35.4 & 16.3 & 25.9 & 73.9 & 26.1 \\
+5~Unvalidated-causal & 34.3 & 17.4 & 25.9 & 82.6 & 17.4 \\
+\textbf{6~Lift-validated (ours)} & \textbf{45.3} & \textbf{22.3} & \textbf{33.8} & 80.7 & 19.3 \\\bottomrule
 \end{tabular}\end{table}
 
 McNemar: lift-validated $>$ unvalidated $p=1.7\times10^{-6}$, $>$ assoc $1.9\times10^{-10}$, $>$ text-RAG $2.2\times10^{-35}$, $>$ closed-book $6.9\times10^{-31}$ (Fig.~\ref{fig:qa}). The SemMedDB-only baseline improves over unstructured retrieval but remains below patient-note graph retrieval, consistent with the audit finding that literature corroboration is useful but coverage-limited.
