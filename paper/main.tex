@@ -3,6 +3,7 @@
 \usepackage{graphicx}
 \usepackage{amsmath,amssymb}
 \usepackage{booktabs}
+\usepackage[section]{placeins}
 \usepackage[hidelinks]{hyperref}
 
 \begin{document}
@@ -43,7 +44,7 @@ Together these results expose an asymmetry: \emph{existence} can be validated wi
 \end{enumerate}
 The main value of the study is diagnostic: it identifies which validation signal can be trusted before causal edges are used for retrieval, rather than treating the QA delta as the sole contribution.
 
-\begin{figure}[t]\centering
+\begin{figure}[!htbp]\centering
 \includegraphics[width=\textwidth]{fig1.pdf}
 \caption{Overview. \textbf{Build:} a causal KG is mined from clinical notes (Qwen + UMLS). \textbf{Audit:} each edge is scored against independent literature evidence (SemMedDB): co-occurrence lift removes spurious edges, cross-admission coding-order temporal precedence is unreliable as a direction signal (54\% vs.\ 74\%), and literature corroboration is partial. \textbf{Apply:} causal RAG is grounded in the resulting lift-validated graph to answer a held-out patient's causal question.}
 \label{fig:overview}
@@ -62,7 +63,7 @@ The main value of the study is diagnostic: it identifies which validation signal
 
 \noindent\textbf{Positioning.} Table~\ref{tab:position} summarizes how our work differs from representative prior systems along five axes. The present study combines four elements that are usually treated separately: directed causal edge mining from patient narratives, structured-EHR validation, direction-signal auditing, and a causal QA benchmark.
 
-\begin{table}[t]\centering\caption{Positioning vs.\ representative prior work along five axes ($\checkmark$~yes, $\sim$~partial, $\times$~no). GraphCare / Medical Graph RAG use associative or ontology edges; CausalRAG is general-domain; literature-derived causal KGs are not mined from patient narratives and do not audit edge direction, even when they use EMR filtering or EHR case-study evaluation. Ours mines directed causal edges from patient notes, validates them with co-occurrence lift, audits direction against SemMedDB, and defines a causal QA benchmark.}\label{tab:position}
+\begin{table}[!htbp]\centering\caption{Positioning vs.\ representative prior work along five axes ($\checkmark$~yes, $\sim$~partial, $\times$~no). GraphCare / Medical Graph RAG use associative or ontology edges; CausalRAG is general-domain; literature-derived causal KGs are not mined from patient narratives and do not audit edge direction, even when they use EMR filtering or EHR case-study evaluation. Ours mines directed causal edges from patient notes, validates them with co-occurrence lift, audits direction against SemMedDB, and defines a causal QA benchmark.}\label{tab:position}
 \setlength{\tabcolsep}{2pt}\footnotesize
 \begin{tabular}{lccccc}\toprule
  & Causal & Patient & EHR & Direction & QA \\
@@ -78,7 +79,7 @@ Lit.\ causal KGs~\cite{kilicoglu2012semmeddb,nordon2019building,lyu2023dnkg,ade2
 
 \noindent\textbf{Normalization.} Surface phrases are noisy (synonyms, abbreviations, modifiers), so we link each cause/effect span to a UMLS~\cite{bodenreider2004umls} Concept Unique Identifier (CUI) with a scispaCy~\cite{neumann2019scispacy} candidate generator, accepting the top candidate when cosine similarity $\geq0.80$ and its semantic types are not in a non-clinical blocklist; co-referring surface forms thereby collapse to one concept node. Linking raises the giant connected component from 86.9\% to 97.1\% and more than doubles the link rate versus a rule-based cue-phrase extractor (49.3\% vs.\ 21.9\%) at comparable graph size (Table~\ref{tab:kg}), confirming that LLM spans are cleaner concepts. Table~\ref{tab:kg} reports the full pre-split graph. After a patient-level split for leakage control (\S\ref{sec:qa}), the train-only KG used for retrieval and release has 3{,}899 concept nodes and 16{,}273 directed edges.
 
-\begin{table}[t]\centering\caption{KG construction on the full pre-split corpus: rule vs.\ LLM extraction.}\label{tab:kg}\footnotesize
+\begin{table}[!htbp]\centering\caption{KG construction on the full pre-split corpus: rule vs.\ LLM extraction.}\label{tab:kg}\footnotesize
 \begin{tabular}{lrr}\toprule
 Metric & Rule-based & LLM (ours) \\\midrule
 Raw surface edges & 142{,}890 & 1{,}173{,}644 \\
@@ -100,7 +101,7 @@ We map ICD diagnoses to CUIs and, for edge $A\rightarrow B$, compute the within-
 \subsection{Cross-admission temporal precedence does not recover direction}
 We hypothesized that across admissions a cause is coded \emph{before} its effect. We test this: for the 4{,}943 edges with SemMedDB direction, compare the extractor's surface direction and temporal precedence against the literature gold (Table~\ref{tab:audit}).
 
-\begin{table}[t]\centering\caption{Direction-signal accuracy vs.\ SemMedDB ($n=4{,}943$ edges). Temporal precedence abstains on 86\% of edges; on the 686 where it commits it is below the extractor's own direction and near chance.}\label{tab:audit}\footnotesize
+\begin{table}[!htbp]\centering\caption{Direction-signal accuracy vs.\ SemMedDB ($n=4{,}943$ edges). Temporal precedence abstains on 86\% of edges; on the 686 where it commits it is below the extractor's own direction and near chance.}\label{tab:audit}\footnotesize
 \begin{tabular}{lc}\toprule
 Direction signal & Acc.\ vs.\ SemMedDB \\\midrule
 Raw LLM extraction direction & \textbf{73.6\%} \\
@@ -110,7 +111,7 @@ Temporal precedence (committed, $n{=}686$) & 54.2\% \\
 
 McNemar (temporal vs.\ LLM): LLM-only-right 3{,}365 vs.\ temporal-only-right 100, $p\approx0$. This test scores temporal precedence as an independent directioner over all 4{,}943 edges; abstention is counted as failing to recover the literature direction. Of temporal's 304 ``reversed'' verdicts, only 100 are true corrections while 204 are false reversals (e.g.\ asthma$\rightarrow$wheezing, hemorrhage$\rightarrow$anemia, abdominal-pain$\rightarrow$appendicitis flipped; Fig.~\ref{fig:audit}).
 
-\begin{figure}[t]\centering
+\begin{figure}[!htbp]\centering
 \includegraphics[width=0.78\textwidth]{fig_audit.pdf}
 \caption{Direction-signal audit. \emph{Left:} on the 686 edges where cross-admission temporal precedence commits to a direction, it agrees with SemMedDB less often (54.2\%) than the extractor's own direction (69.4\%) and barely above chance. \emph{Right:} of temporal's 304 ``reversed'' verdicts, 204 are false reversals (coding artifacts) and only 100 are true corrections.}
 \label{fig:audit}
@@ -128,7 +129,7 @@ Among the 2{,}047 lift-supported edges, 886 (43\%) are also attested by SemMedDB
 \subsection{Putting it together: a validation recipe}
 The audit yields a reproducible recipe for converting raw LLM-extracted causal edges into a validated graph, without manual curation (Fig.~\ref{fig:funnel}). Starting from 42{,}798 recurrent surface edges, we first normalize endpoints to UMLS concepts (\S\ref{sec:audit} reduces 16{,}151 surface nodes to 4{,}318 concepts). We then keep edges with within-admission lift~$>1$, yielding 2{,}047 supported edges, and orient each edge by the extractor's direction rather than by coding-order time. Finally, we flag the 886 literature-corroborated edges as a high-confidence core and treat the remainder as EHR-only. The resulting graph has \emph{existence} claims grounded in both text and structured co-occurrence. Its \emph{direction} claims retain source-aware uncertainty. Section~\ref{sec:qa} shows that this graph improves downstream causal QA, and the recipe transfers to note corpora paired with linked structured records.
 
-\begin{figure}[t]\centering
+\begin{figure}[!htbp]\centering
 \includegraphics[width=0.72\textwidth]{fig_funnel.pdf}
 \caption{The validation recipe as a funnel. Recurrent LLM edges are normalized to UMLS concepts, filtered to the EHR lift-supported subgraph (existence validated), and partitioned by literature corroboration into a high-confidence core; direction is taken from the extractor rather than coding-order time.}
 \label{fig:funnel}
@@ -137,7 +138,7 @@ The audit yields a reproducible recipe for converting raw LLM-extracted causal e
 \subsection{Cross-release replication on MIMIC-III}
 To test whether the audit depends on the MIMIC-IV release, we reran the same extraction, UMLS normalization, structured-diagnosis lift validation, temporal analysis, and SemMedDB comparison on MIMIC-III. The replication uses 53{,}981 usable discharge-summary sections and yields 237{,}957 clean triples, 221{,}454 surface edges, and 35{,}232 CUI-level edges. Although this graph is larger and noisier than the MIMIC-IV train graph, the qualitative conclusions replicate (Fig.~\ref{fig:mimic3}): 942 of 2{,}318 diagnosis-testable edges are lift-supported (40.6\%); SemMedDB covers 6{,}753 edges (19.2\%); extractor direction remains aligned with SemMedDB (70.5\%, close to 73.6\% on MIMIC-IV); and coding-order direction remains near chance (50.9\%, close to 54.2\%). Thus MIMIC-III strengthens the central audit claim under a different EHR release: existence validation transfers, while naive temporal orientation remains unreliable.
 
-\begin{figure}[h!]\centering
+\begin{figure}[!htbp]\centering
 \includegraphics[width=0.78\textwidth]{fig_mimic3_replication.pdf}
 \caption{Cross-release replication on MIMIC-III. Compared with the main MIMIC-IV audit, MIMIC-III has lower diagnosis-lift support and lower SemMedDB coverage, but the direction pattern is stable: the extractor's direction remains substantially above chance, whereas coding-order temporal direction remains near chance.}
 \label{fig:mimic3}
@@ -155,7 +156,7 @@ The unvalidated-causal condition is the direct ablation of our method: the same 
 
 For the graph systems, retrieval is direction-aware: a WHY question pulls the \emph{in}-edges of the asked effect (its candidate causes) and a WHATCAUSES question its \emph{out}-edges, ranked by lift, frequency, or PMID support. The top~12 are serialized into the prompt, and the lift-validated system additionally annotates each candidate with its lift. The generator returns a single condition, which we then match. Generation and judging run on a 7B open model on a private cluster, so MIMIC text does not leave the compliant environment.
 
-\begin{table}[t]\centering\caption{Causal QA on held-out patients (\%). $n=932$ paired.}\label{tab:qa}\footnotesize
+\begin{table}[!htbp]\centering\caption{Causal QA on held-out patients (\%). $n=932$ paired.}\label{tab:qa}\footnotesize
 \setlength{\tabcolsep}{6pt}
 \begin{tabular}{lccccc}\toprule
 System & WHY & WHATCAUSES & Overall & Faith. & Hall. \\\midrule
@@ -169,7 +170,7 @@ System & WHY & WHATCAUSES & Overall & Faith. & Hall. \\\midrule
 
 McNemar: lift-validated $>$ unvalidated $p=1.7\times10^{-6}$, $>$ assoc $1.9\times10^{-10}$, $>$ text-RAG $2.2\times10^{-35}$, $>$ closed-book $6.9\times10^{-31}$ (Fig.~\ref{fig:qa}). The SemMedDB-only baseline improves over unstructured retrieval but remains below patient-note graph retrieval, consistent with the audit finding that literature corroboration is useful but coverage-limited.
 
-\begin{figure}[t]\centering
+\begin{figure}[!htbp]\centering
 \includegraphics[width=0.62\textwidth]{fig_qa.pdf}
 \caption{Causal-QA correctness on held-out patients. Grounding in the lift-validated causal graph beats the unvalidated graph by $+7.9$ pts ($p<10^{-6}$); naive text-RAG underperforms even the no-retrieval baseline.}
 \label{fig:qa}
