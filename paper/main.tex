@@ -3,7 +3,11 @@
 \usepackage{graphicx}
 \usepackage{amsmath,amssymb}
 \usepackage{booktabs}
-\usepackage[section]{placeins}
+\setlength{\textfloatsep}{8pt plus 2pt minus 2pt}
+\setlength{\floatsep}{6pt plus 2pt minus 2pt}
+\setlength{\intextsep}{6pt plus 2pt minus 2pt}
+\setlength{\abovecaptionskip}{3pt}
+\setlength{\belowcaptionskip}{0pt}
 \usepackage[hidelinks]{hyperref}
 
 \begin{document}
@@ -40,13 +44,13 @@ Together these results expose an asymmetry: patient-level EHR support can be scr
 \item \textbf{A patient-grounded causal QA benchmark} with leakage-controlled, dual-signal reference answers. The benchmark pairs clinician-stated causal assertions with EHR support, making it a targeted test bed for support-filtered causal retrieval rather than a claim of causal ground truth.
 \item \textbf{A systematic audit} of three signals against independent literature evidence, yielding the \emph{EHR-supported, direction-uncertain} asymmetry. Co-occurrence lift filters unsupported candidates, while cross-admission coding order is near chance and literature corroboration is coverage-limited.
 \item \textbf{A reproducible causal KG construction pipeline} for 328K patient discharge notes (LLM~+~UMLS), with per-candidate audit metadata (lift, temporal, SemMedDB) and a cross-release MIMIC-III replication of the audit.
-\item A controlled causal-RAG study in which lift-only retrieval is the honest base after the temporal-direction audit. A conservative causal-demotion policy improves overall accuracy and sharply reduces unsupported hallucinated answers without lowering retrieval recall.
+\item A controlled causal-RAG study in which lift-only retrieval is the honest base after the temporal-direction audit. A conservative causal-demotion policy preserves recall, sharply reduces unsupported hallucinated answers, and gives a small measured accuracy gain.
 \end{enumerate}
 The main value of the study is diagnostic: it identifies which support signal can be used before extracted causal candidates are retrieved, rather than treating the QA delta as the sole contribution.
 
 \begin{figure}[!htbp]\centering
 \includegraphics[width=\textwidth]{fig1.pdf}
-\caption{Overview. \textbf{Build:} a graph of causal candidates is mined from clinical notes (Qwen + UMLS). \textbf{Audit:} each candidate relation is scored against independent literature evidence (SemMedDB): co-occurrence lift filters unsupported candidates, cross-admission coding-order temporal precedence is unreliable as a direction signal (54\% vs.\ 74\%), and literature corroboration is partial. \textbf{Apply:} causal RAG is grounded in the resulting lift-supported candidate graph to answer a held-out patient's causal question.}
+\caption{Overview. \textbf{Build:} a graph of causal candidates is mined from clinical notes (Qwen + UMLS). \textbf{Audit:} each candidate relation is scored against independent literature evidence (SemMedDB): co-occurrence lift filters unsupported candidates, cross-admission coding-order temporal precedence is unreliable as a direction signal (54\% vs.\ 74\%), and literature corroboration is partial. \textbf{Apply:} support-aware causal RAG uses the EHR-supported candidate graph and demotes candidates that fail the causal screen to answer held-out causal questions.}
 \label{fig:overview}
 \end{figure}
 
@@ -170,11 +174,11 @@ System & WHY & WHATCAUSES & Overall & Faith. & Hall. & Recall \\\midrule
 \textbf{8~Lift-only + demotion (ours)} & \textbf{48.5} & \textbf{26.0} & \textbf{37.2} & \textbf{93.9} & \textbf{6.1} & \textbf{86.3} \\\bottomrule
 \end{tabular}\end{table}
 
-The broad comparison shows that graph retrieval is substantially better than text-only retrieval or closed-book generation. The support-aware comparison is the cleaner ablation after the audit: lift-only retrieval avoids the refuted temporal flip, and causal demotion preserves the same retrieval recall while improving every correctness axis. The overall gain over lift-only is modest (+1.5 points; McNemar $p=0.27$), so we do not claim a statistically significant accuracy improvement. The robust effect is faithfulness: unsupported hallucinated answers fall from 17.3\% to 6.1\% at the same 86.3\% retrieval recall.
+The broad comparison shows that graph retrieval is substantially better than text-only retrieval or closed-book generation. The support-aware comparison is the cleaner ablation after the audit: lift-only retrieval avoids the refuted temporal flip, and causal demotion preserves the same retrieval recall while raising the measured correctness scores. The overall gain over lift-only is modest (+1.5 points; McNemar $p=0.27$), so we do not claim a statistically significant accuracy improvement. The robust effect is faithfulness: unsupported hallucinated answers fall from 17.3\% to 6.1\% at the same 86.3\% retrieval recall.
 
 \begin{figure}[!htbp]\centering
 \includegraphics[width=0.62\textwidth]{fig_qa.pdf}
-\caption{Causal-QA correctness on held-out patients. The final system uses lift-only retrieval and demotes candidates that fail the causal screen, improving overall accuracy over the honest lift-only base while sharply reducing unsupported hallucinated answers.}
+\caption{Causal-QA correctness on held-out patients. The final system uses lift-only retrieval and demotes candidates that fail the causal screen, giving a small measured accuracy gain over the honest lift-only base while sharply reducing unsupported hallucinated answers.}
 \label{fig:qa}
 \end{figure}
 
@@ -194,7 +198,7 @@ This experiment probes the EHR-support filtering part of the audit. The question
 
 \noindent\textbf{Threats to validity.} Our reference relations are EHR-supported by construction and therefore overlap the lift-supported graph, which could in principle favour it. The raw-causal baseline, however, contains a \emph{superset} of those candidates. The comparison therefore isolates the effect of removing unsupported neighbours rather than the effect of possessing the answers. It is still a coupled benchmark-method evaluation, so we interpret the QA result as downstream utility under an explicit support-filtering definition, not as independent causal validation of lift. Population-level lift uses structured codes from all patients; although these codes cannot reveal a test patient's held-out note text, a train-only support estimate would be a stricter variant. We also do not yet report a lift-threshold sensitivity sweep or stronger BM25, embedding, and hybrid text retrievers. The lift-only condition includes lift scores in the retrieved evidence, so the ablation tests the deployed support-aware retrieval recipe rather than a pure filter-only change. The causal-demotion variant uses a derived causal screen and should be read as evidence ordering, not causal proof. The measured gain is strongest for faithfulness and hallucination; exact concept accuracy trends upward but is not significant in the paired test. The correctness metric rewards recovery of the canonical concept and partly relies on an automatic judge after CUI matching, although a balanced 120-item subset is human checked. Under a lenient clinical-acceptability metric the systems converge, which we report as a boundary of the benchmark.
 
-\noindent\textbf{Other limitations.} We use a single 7B open model and English ICU notes. The downstream QA benchmark is built on MIMIC-IV; MIMIC-III is used to test whether the support and direction signals replicate across an older EHR release, not to duplicate the full QA benchmark. This choice keeps the external experiment aligned with the paper's central audit question. Absolute QA numbers are modest, but the relative differences are statistically significant. The text-RAG baseline is a simple TF-IDF retrieval condition, not a strongest-possible clinical text retriever; the direct comparison with raw-causal retrieval is therefore the cleaner ablation for our claim. Lift covers diagnosis-coded endpoints, so causes involving drugs, adverse events, and clinical findings are presently out of scope; integrating prescription and adverse-event signals, as well as multi-hop causal chains, would extend coverage. SemMedDB corroborates only a minority of candidates, limiting literature-based direction to that subset. Co-occurrence lift is an association signal; it supports an extracted candidate but cannot by itself establish a true causal relation.
+\noindent\textbf{Other limitations.} We use a single 7B open model and English ICU notes. The downstream QA benchmark is built on MIMIC-IV; MIMIC-III is used to test whether the support and direction signals replicate across an older EHR release, not to duplicate the full QA benchmark. This choice keeps the external experiment aligned with the paper's central audit question. Absolute QA numbers are modest; the clearest downstream effect is reduced unsupported hallucination, while exact concept accuracy shows a non-significant upward trend. The text-RAG baseline is a simple TF-IDF retrieval condition, not a strongest-possible clinical text retriever; the direct comparison with raw-causal retrieval is therefore the cleaner ablation for our claim. Lift covers diagnosis-coded endpoints, so causes involving drugs, adverse events, and clinical findings are presently out of scope; integrating prescription and adverse-event signals, as well as multi-hop causal chains, would extend coverage. SemMedDB corroborates only a minority of candidates, limiting literature-based direction to that subset. Co-occurrence lift is an association signal; it supports an extracted candidate but cannot by itself establish a true causal relation.
 
 \noindent\textbf{Released artifacts.} To support reproducible causal-KG construction from clinical text, the anonymous artifact package at \url{https://anonymous.4open.science/r/clinical-causal-kg-artifact-C950/} provides all extraction, support filtering, and evaluation code, the paper source and figures, non-patient-level aggregate summaries, and the MIMIC-III replication summary. Because MIMIC, UMLS, and SemMedDB restrict redistribution, we do not upload raw notes, patient-grounded benchmark files, model prompts or outputs derived from notes, or raw literature-predication tables. The scripts regenerate the support-filtered KG, benchmark instances, and audit labels once the reviewer has credentialed access to the required resources.
 
