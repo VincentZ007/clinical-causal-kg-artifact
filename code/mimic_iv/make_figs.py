@@ -26,7 +26,7 @@ MUTED, HILITE, BAD, BLUE = "#9e9e9e", "#2e7d32", "#c62828", "#607d8b"
 # ---- Fig 2: QA overall correctness ----
 sys = ["Closed", "Text", "SemMed", "Assoc",
        "Raw", "Temp.", "Lift", "Demote"]
-ov = [15.8, 12.9, 19.2, 25.9, 25.9, 35.6, 35.7, 37.2]
+ov = [15.8, 12.9, 19.2, 25.9, 27.3, 35.6, 35.7, 37.2]
 colors = [MUTED, MUTED, MUTED, MUTED, BLUE, "#80a6bc", "#6aa783", HILITE]
 fig, ax = plt.subplots(figsize=(3.45, 2.15))
 bars = ax.bar(range(len(ov)), ov, color=colors, width=0.66, edgecolor="white", linewidth=0.5)
