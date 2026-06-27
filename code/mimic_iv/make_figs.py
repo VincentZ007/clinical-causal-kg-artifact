@@ -6,11 +6,19 @@ from pathlib import Path
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+from matplotlib.lines import Line2D
 
 plt.rcParams.update({
-    "font.size": 8, "font.family": "DejaVu Sans", "axes.spines.top": False,
-    "axes.spines.right": False, "axes.linewidth": 0.7, "xtick.major.size": 0,
-    "ytick.major.width": 0.7, "figure.dpi": 200,
+    "font.size": 8,
+    "font.family": "Times New Roman",
+    "pdf.fonttype": 42,
+    "ps.fonttype": 42,
+    "axes.spines.top": False,
+    "axes.spines.right": False,
+    "axes.linewidth": 0.7,
+    "xtick.major.size": 0,
+    "ytick.major.width": 0.7,
+    "figure.dpi": 200,
 })
 OUT = Path("paper")
 OUT.mkdir(parents=True, exist_ok=True)
@@ -28,11 +36,6 @@ for i, v in enumerate(ov):
             fontweight="bold" if i == len(ov) - 1 else "normal")
 ax.set_xticks(range(len(ov))); ax.set_xticklabels(sys, fontsize=6.2)
 ax.set_ylabel("causal-QA correctness (%)"); ax.set_ylim(0, 42)
-ax.axhline(ov[6], ls=":", lw=0.8, color="#6aa783", zorder=0)
-ax.annotate("+1.5", xy=(7, 37.2), xytext=(6.15, 40.0), fontsize=7, color=HILITE,
-            ha="center", arrowprops=dict(arrowstyle="->", color=HILITE, lw=0.8))
-ax.text(0.10, 39.0, "Hall. 17.3 -> 6.1", fontsize=6.2, color=HILITE,
-        ha="left", va="center")
 fig.tight_layout(pad=0.3)
 fig.savefig(OUT / "fig_qa.pdf", bbox_inches="tight", metadata={"Creator": "", "Producer": "", "Title": "", "Author": ""})
 fig.savefig(OUT / "fig_qa.png", bbox_inches="tight", dpi=200)
@@ -46,7 +49,8 @@ acc = [69.4, 54.2]
 a1.bar(xb, acc, color=["#607d8b", BAD], width=0.7, edgecolor="white", linewidth=0.5)
 for x, v in zip(xb, acc):
     a1.text(x, v + 1.5, f"{v:.1f}", ha="center", va="bottom", fontsize=7.5)
-a1.axhline(50, ls="--", lw=0.8, color="#444"); a1.text(2.05, 51, "chance", fontsize=6.3, color="#444", ha="left")
+a1.axhline(50, ls="--", lw=0.8, color="#444")
+a1.text(2.05, 51, "chance", fontsize=6.3, color="#444", ha="left")
 a1.set_xticks(xb); a1.set_xticklabels(["LLM\nextraction", "temporal\nprecedence"], fontsize=6.3)
 a1.set_ylabel("direction acc. vs\nSemMedDB (%)"); a1.set_ylim(0, 82); a1.set_xlim(-0.75, 2.45)
 a1.set_title("on 686 committed edges", fontsize=6.8)
@@ -60,6 +64,12 @@ a2.text(0.30, 254, "true\ncorrection", ha="left", va="center", fontsize=6.2, col
 a2.set_xticks([0]); a2.set_xticklabels(["temporal\n'reversed' calls"], fontsize=7)
 a2.set_ylabel("# edges"); a2.set_ylim(0, 340); a2.set_xlim(-0.55, 1.5)
 fig.tight_layout(pad=0.3)
+left_box, right_box = a1.get_position(), a2.get_position()
+x_sep = (left_box.x1 + right_box.x0) / 2
+y0 = min(left_box.y0, right_box.y0)
+y1 = max(left_box.y1, right_box.y1)
+fig.add_artist(Line2D([x_sep, x_sep], [y0, y1], transform=fig.transFigure,
+                      color="#d6d6d6", lw=0.6))
 fig.savefig(OUT / "fig_audit.pdf", bbox_inches="tight", metadata={"Creator": "", "Producer": "", "Title": "", "Author": ""})
 fig.savefig(OUT / "fig_audit.png", bbox_inches="tight", dpi=200)
 plt.close(fig)
