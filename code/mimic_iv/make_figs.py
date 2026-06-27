@@ -6,7 +6,6 @@ from pathlib import Path
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-from matplotlib.lines import Line2D
 
 plt.rcParams.update({
     "font.size": 8,
@@ -20,7 +19,7 @@ plt.rcParams.update({
     "ytick.major.width": 0.7,
     "figure.dpi": 200,
 })
-OUT = Path("paper")
+OUT = Path("paper_pricai")
 OUT.mkdir(parents=True, exist_ok=True)
 MUTED, HILITE, BAD, BLUE = "#9e9e9e", "#2e7d32", "#c62828", "#607d8b"
 
@@ -64,14 +63,8 @@ a2.text(0.30, 254, "true\ncorrection", ha="left", va="center", fontsize=6.2, col
 a2.set_xticks([0]); a2.set_xticklabels(["temporal\n'reversed' calls"], fontsize=7)
 a2.set_ylabel("# edges"); a2.set_ylim(0, 340); a2.set_xlim(-0.55, 1.5)
 fig.tight_layout(pad=0.3)
-left_box, right_box = a1.get_position(), a2.get_position()
-x_sep = (left_box.x1 + right_box.x0) / 2
-y0 = min(left_box.y0, right_box.y0)
-y1 = max(left_box.y1, right_box.y1)
-fig.add_artist(Line2D([x_sep, x_sep], [y0, y1], transform=fig.transFigure,
-                      color="#d6d6d6", lw=0.6))
 fig.savefig(OUT / "fig_audit.pdf", bbox_inches="tight", metadata={"Creator": "", "Producer": "", "Title": "", "Author": ""})
 fig.savefig(OUT / "fig_audit.png", bbox_inches="tight", dpi=200)
 plt.close(fig)
 
-print("wrote paper/fig_qa.pdf and paper/fig_audit.pdf")
+print("wrote paper_pricai/fig_qa.pdf and paper_pricai/fig_audit.pdf")
