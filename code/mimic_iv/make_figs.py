@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""Paper data figures (vector PDF, single-column width).
-fig_qa.pdf    : causal-QA overall correctness (final system highlighted)
+"""Paper data figures (vector PDF, LNCS-compatible).
+fig_qa.pdf    : causal-QA correctness plus unsupported hallucination
 fig_audit.pdf : direction-signal audit vs SemMedDB (the negative result)"""
 from pathlib import Path
 import matplotlib
@@ -19,22 +19,35 @@ plt.rcParams.update({
     "ytick.major.width": 0.7,
     "figure.dpi": 200,
 })
-OUT = Path("paper_pricai")
+OUT = Path("paper")
 OUT.mkdir(parents=True, exist_ok=True)
 MUTED, HILITE, BAD, BLUE = "#9e9e9e", "#2e7d32", "#c62828", "#607d8b"
 
-# ---- Fig 2: QA overall correctness ----
+# ---- Fig 5: QA correctness and unsupported hallucination ----
 sys = ["Closed", "Text", "SemMed", "Assoc",
        "Raw", "Temp.", "Lift", "Demote"]
 ov = [15.8, 12.9, 19.2, 25.9, 27.3, 35.6, 35.7, 37.2]
 colors = [MUTED, MUTED, MUTED, MUTED, BLUE, "#80a6bc", "#6aa783", HILITE]
-fig, ax = plt.subplots(figsize=(3.45, 2.15))
+hall_sys = ["SemMed", "Assoc", "Raw", "Temp.", "Lift", "Demote"]
+hall = [16.2, 26.1, 16.8, 13.7, 17.3, 6.1]
+hall_colors = [MUTED, MUTED, BLUE, "#80a6bc", "#6aa783", HILITE]
+fig, (ax, axh) = plt.subplots(
+    1, 2, figsize=(5.65, 2.18), gridspec_kw={"width_ratios": [1.45, 1.0]}
+)
 bars = ax.bar(range(len(ov)), ov, color=colors, width=0.66, edgecolor="white", linewidth=0.5)
 for i, v in enumerate(ov):
     ax.text(i, v + 0.6, f"{v:.1f}", ha="center", va="bottom", fontsize=7.5,
             fontweight="bold" if i == len(ov) - 1 else "normal")
 ax.set_xticks(range(len(ov))); ax.set_xticklabels(sys, fontsize=6.2)
 ax.set_ylabel("causal-QA correctness (%)"); ax.set_ylim(0, 42)
+ax.set_title("Answer correctness", fontsize=8, pad=3)
+axh.bar(range(len(hall)), hall, color=hall_colors, width=0.66, edgecolor="white", linewidth=0.5)
+for i, v in enumerate(hall):
+    axh.text(i, v + 0.45, f"{v:.1f}", ha="center", va="bottom", fontsize=7.5,
+             fontweight="bold" if i == len(hall) - 1 else "normal")
+axh.set_xticks(range(len(hall))); axh.set_xticklabels(hall_sys, fontsize=6.2)
+axh.set_ylabel("unsupported hallucination (%)"); axh.set_ylim(0, 29)
+axh.set_title("Unsupported hallucination", fontsize=8, pad=3)
 fig.tight_layout(pad=0.3)
 fig.savefig(OUT / "fig_qa.pdf", bbox_inches="tight", metadata={"Creator": "", "Producer": "", "Title": "", "Author": ""})
 fig.savefig(OUT / "fig_qa.png", bbox_inches="tight", dpi=200)
@@ -67,4 +80,4 @@ fig.savefig(OUT / "fig_audit.pdf", bbox_inches="tight", metadata={"Creator": "",
 fig.savefig(OUT / "fig_audit.png", bbox_inches="tight", dpi=200)
 plt.close(fig)
 
-print("wrote paper_pricai/fig_qa.pdf and paper_pricai/fig_audit.pdf")
+print("wrote paper/fig_qa.pdf and paper/fig_audit.pdf")
