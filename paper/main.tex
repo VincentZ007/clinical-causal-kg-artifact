@@ -164,8 +164,8 @@ For the graph systems, retrieval is direction-aware: a WHY question pulls the \e
 
 \smallskip\noindent\textbf{Causal-screen demotion.} The demotion layer is a post-retrieval ordering rule, not a new retriever. Lift-only retrieval first selects the same top-12 candidates by co-occurrence lift. The causal screen is queried only for those directed pairs: for WHY, candidate cause$\rightarrow$queried effect; for WHATCAUSES, queried cause$\rightarrow$candidate effect. The screen is estimated on the training split as a new-user, incident-outcome design over structured diagnoses: the cause must occur at baseline, the effect must first appear later among outcome-naive patients, and each patient needs follow-up ($\geq$2 admissions). The adjusted risk-ratio signal uses inverse-propensity weighting for age, sex, and baseline comorbidity burden, then calibrates a $z$ score with automatically sampled negative-control diagnosis outcomes that the cause does not point to in the candidate KG; these controls are not manually chosen and do not use held-out QA answers. The implementation samples up to 20 controls per tested pair, requires at least five valid controls for calibration, and estimates a pair only when both exposure arms have at least 50 eligible patients and at least 10 incident outcome events. A candidate \emph{passes} if $z\geq1.64$, \emph{fails} if it is estimated but below that one-sided 5\% threshold, and is \emph{untested} otherwise. The cutoff, screen, and QA prompts are fixed before answer generation and are not tuned on held-out QA answers. Demotion moves failed candidates to the end of the same top-12 list while leaving pass and untested candidates in lift order; it changes ordering but cannot add or remove candidates.
 
-\smallskip\noindent\textbf{Causal-screen coverage.} Across the 932 lift-only questions, the retriever returns 9{,}253 top-12 candidate slots. The screen changes evidence order in 678 questions (72.7\%) while preserving recall by construction:
-\begin{center}
+\begin{table}[!htbp]\centering
+\caption{Causal-screen coverage and ranking effect in the lift-only top-12 retrieval lists. The screen is applied only after lift-only retrieval has selected the same candidate set. Demotion changes evidence order but does not add or remove candidates, so retrieval recall is preserved; 678/932 questions (72.7\%) have their evidence order changed.}\label{tab:screen}
 \scriptsize
 \setlength{\tabcolsep}{3pt}
 \begin{tabular}{lrrrrr}\toprule
@@ -175,7 +175,7 @@ Fail ($z<1.64$) & 4{,}510 & 48.7 & 494 & 807 (86.6) & 7.09$\to$8.39 \\
 Untested & 3{,}025 & 32.7 & 377 & 780 (83.7) & 5.54$\to$4.08 \\
 Total & 9{,}253 & 100 & -- & 932 & -- \\\bottomrule
 \end{tabular}
-\end{center}
+\end{table}
 
 \begin{table}[!htbp]\centering\caption{Causal QA on held-out patients (\%). $n=932$ paired.}\label{tab:qa}\footnotesize
 \setlength{\tabcolsep}{3.5pt}
